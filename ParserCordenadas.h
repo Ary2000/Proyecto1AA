@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <tuple>
 
 //string prueba ="m 12,13 2,-3 z m 1,1 2,2 z";
 
 
 //Funcion que recibe como parametros el String de Cordenadas X y Y, devuelde la Sumatoria de ambas
-std::vector<float> ParserCordenadasXY(std::string pCordenadas) {
+std::tuple<std::vector<float>, std::vector<float>> ParserCordenadasXY(std::string pCordenadas) {
 
     std::vector<float> CordenadasX{};
     std::vector<float> CordenadasY{};
+    std::tuple<std::vector<float>, std::vector<float>> CordenadasXY{};
 
     int largoString = pCordenadas.length();
     float sumatoriaX = 0;
@@ -49,7 +51,8 @@ std::vector<float> ParserCordenadasXY(std::string pCordenadas) {
             indiceX = " ";
         }
     }
-    
-    return CordenadasX;
+
+    CordenadasXY = make_tuple(CordenadasX,CordenadasY);
+    return CordenadasXY;
 
 }
