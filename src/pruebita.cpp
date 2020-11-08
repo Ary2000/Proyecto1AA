@@ -3,10 +3,14 @@
 #include <vector>
 #include <list>
 #include <algorithm>
-//#include "Pais.h"
-//#include "Coord.h"
+#include "include/Coord.h"
+#include "include/Pais.h"
+
+#define CANTIDADCOLORES 4
+
 using namespace std;
 
+/*
 class Pais
 {
 //private:
@@ -40,6 +44,7 @@ public:
 	friend struct OrdenadoPorX;
 	friend struct OrdenadoPorY;
 };
+*/
 
 struct OrdenadoPorX
 {
@@ -122,6 +127,17 @@ void contarPosiblesAdyacentes(vector<Coord*> coordenadas)
 		revisarAdyacentes(posIzq, posDer, coordenadas);
 }
 
+void unirPaisesNoAdyacentesAux(Pais* paisOriginal, vector<Pais*>& paisesNoAdyacentes)
+{
+
+}
+
+void unirPaisesNoAdyacentes(Pais* paisOriginal)
+{
+	vector<Pais*> paisesNoAdyacentes[CANTIDADCOLORES];
+	//unirPaisesNoAdyacentesAux(paisOriginal, paisesNoAdyacentes);
+}
+
 int main()
 {
 	Pais* CostaRica = new Pais("Costa Rica");
@@ -135,7 +151,7 @@ int main()
 	coordenadas.push_back(new Coord(1, 1, Guatemala));
 	coordenadas.push_back(new Coord(1, 1, CostaRica));
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
-	cout << coordenadas.size() << endl;
+	cout << 7 << endl;
 	contarPosiblesAdyacentes(coordenadas);
 	return 0;
 }
