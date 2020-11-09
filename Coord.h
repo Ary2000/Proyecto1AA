@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Pais.h"
+#include "Pais.hpp"
 
 class Coord
 {

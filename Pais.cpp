@@ -1,4 +1,4 @@
-#include "include/Pais.h"
+#include "Pais.hpp"
 
 Pais::Pais(std::string nombre) { this->nombre = nombre; }
 

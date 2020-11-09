@@ -1,4 +1,4 @@
-#include "include/Coord.h"
+#include "Coord.h"
 
 Coord::Coord(int coordX, int coordY, Pais* paisOriginal) 
 {
