@@ -13,7 +13,6 @@ std::tuple<std::vector<float>, std::vector<float>> ParserCordenadasXY(std::strin
     std::vector<float> CordenadasY{};
     std::tuple<std::vector<float>, std::vector<float>> CordenadasXY{};
 
-    0.8,0.1 0.2,-0.4 z M 967,296 l -8.2,-0.2 -4.2,0.3
 
     int largoString = pCordenadas.length();
     float sumatoriaX = 0;
