@@ -3,15 +3,17 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+
 #include "pugixml.hpp"
 #include "ParserCordenadas.h"
-#include "Pais.hpp"
+#include "Pais.h"
 #include "Coord.h"
-#include "Pais.cpp"		//?
-#include "Coord.cpp"	//?
+#include "Mundo.h"
 
-//#include "Pais.h"
-//#include "Coord.h"
+#include "Pais.cpp"
+#include "Coord.cpp"
+#include "Mundo.cpp"
+
 using namespace std;
 
 struct OrdenadoPorX
@@ -97,7 +99,6 @@ void contarPosiblesAdyacentes(vector<Coord*> coordenadas)
 
 int main()
 {
-
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file("world.svg");
 	pugi::xml_node pais1 = doc.child("svg").child("path");
@@ -110,6 +111,8 @@ int main()
 	vector<Coord*> coordenadas;
 	std::string pruebaCo;
 
+	Mundo* mundo = new Mundo();
+	/*
 	while(pais1 != NULL)
 	{
 		cout << pais1.attribute("id").value() << endl;
@@ -118,15 +121,43 @@ int main()
 		CoX = std::get<0>(CordenadasPais);
 		CoY = std::get<1>(CordenadasPais);
 		Pais* paisActual = new Pais(pais1.attribute("data-name").value());
+		//mundo->anadirPais(paisActual);
 		for (int i = 0; i < CoX.size(); i++)
 				coordenadas.push_back(new Coord(CoX.at(i), CoY.at(i), paisActual));
 		pais1 = pais1.next_sibling();
 	}
+	*/
+	//Seccion prueba
+	Pais* CostaRica = new Pais("Costa Rica");
+	Pais* Nicaragua = new Pais("Nicaragua");
+	Pais* Panama = new Pais("Panama");
+	Pais* Colombia = new Pais("Colombia");
+	Pais* EstadosUnidos = new Pais("Estados Unidos");
+	Pais* Canada = new Pais("Canada");
+	Pais* Espana = new Pais("Espana");
+
+	mundo->anadirPais(CostaRica);
+	mundo->anadirPais(Nicaragua);
+	mundo->anadirPais(Panama);
+	mundo->anadirPais(Colombia);
+	mundo->anadirPais(EstadosUnidos);
+	mundo->anadirPais(Canada);
+	mundo->anadirPais(Espana);
+
+	coordenadas.push_back(new Coord(182, 20, CostaRica));
+	coordenadas.push_back(new Coord(182, 20, Nicaragua));
+	coordenadas.push_back(new Coord(170, 10, CostaRica));
+	coordenadas.push_back(new Coord(170, 10, Panama));
+	coordenadas.push_back(new Coord(60, 60, Panama));
+	coordenadas.push_back(new Coord(60, 60, Colombia));
+	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
+	coordenadas.push_back(new Coord(20, 20, Canada));
+	coordenadas.push_back(new Coord(1, 1, Espana));
 
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
+	mundo->realizarRegiones();
+	
 	return 0;
-
-
 }
