@@ -9,10 +9,15 @@
 #include "Pais.h"
 #include "Coord.h"
 #include "Mundo.h"
+#include "AlgoritmoBT.h"
 
 #include "Pais.cpp"
 #include "Coord.cpp"
 #include "Mundo.cpp"
+#include "AlgoritmoBT.cpp"
+#include "BTColor.cpp"
+
+
 
 using namespace std;
 
@@ -135,6 +140,7 @@ int main()
 	Pais* EstadosUnidos = new Pais("Estados Unidos");
 	Pais* Canada = new Pais("Canada");
 	Pais* Espana = new Pais("Espana");
+	Pais* Ecuador = new Pais("Ecuador");
 
 	mundo->anadirPais(CostaRica);
 	mundo->anadirPais(Nicaragua);
@@ -143,6 +149,7 @@ int main()
 	mundo->anadirPais(EstadosUnidos);
 	mundo->anadirPais(Canada);
 	mundo->anadirPais(Espana);
+	mundo->anadirPais(Ecuador);
 
 	coordenadas.push_back(new Coord(182, 20, CostaRica));
 	coordenadas.push_back(new Coord(182, 20, Nicaragua));
@@ -150,6 +157,9 @@ int main()
 	coordenadas.push_back(new Coord(170, 10, Panama));
 	coordenadas.push_back(new Coord(60, 60, Panama));
 	coordenadas.push_back(new Coord(60, 60, Colombia));
+	coordenadas.push_back(new Coord(90, 90, Colombia));
+	coordenadas.push_back(new Coord(90, 90, Ecuador));
+	
 	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
 	coordenadas.push_back(new Coord(20, 20, Canada));
 	coordenadas.push_back(new Coord(1, 1, Espana));
@@ -158,6 +168,7 @@ int main()
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
 	mundo->realizarRegiones();
-	
+	AlgoritmoBT algoritmoBT(mundo);
+	algoritmoBT.realizarBT();
 	return 0;
 }

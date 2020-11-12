@@ -10,13 +10,20 @@ class Pais
 public:
 	std::string nombre;
 	std::vector<Pais*> paisesAdyacente;
-	bool visitadoRegiones = false;
+	bool visitadoRegiones;
+	bool pasadoBT;
+	int colorBT;
 
-//public:
 	Pais(std::string nombre);
 	void anadirPaisAdyacente(Pais* paisAdyacente);
 	bool haSidoVisitado() { return visitadoRegiones; }
-	void marcarAdyacentes();
+	int marcarAdyacentes();
+
+	//set
+	void setVisitadoBT(bool estadoNuevo) { pasadoBT = estadoNuevo; }
+
+	//get
+	bool fueVisitadoBT() { return pasadoBT; }
 
 };
 

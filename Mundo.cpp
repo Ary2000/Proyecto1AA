@@ -12,7 +12,7 @@ void Mundo::realizarRegiones()
         if((*iteradorPaises)->haSidoVisitado() == false)
         {
             regiones.push_back(*iteradorPaises);
-            (*iteradorPaises)->marcarAdyacentes();
+            tamanoRegiones.push_back((*iteradorPaises)->marcarAdyacentes());
         }
     }
 }

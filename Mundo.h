@@ -13,11 +13,15 @@ class Mundo
 
     public:
     std::vector<Pais*> regiones;
+    std::vector<int> tamanoRegiones;
 
     Mundo();
     void anadirPais(Pais* pais) { paises.push_back(pais); }
     void realizarRegiones();
-
+    Pais* getRegion(int regionSeleccionada) { return regiones[regionSeleccionada]; }
+    int getSizeRegion(int regionSeleccionada) { return tamanoRegiones[regionSeleccionada]; }
+    //Cambiar nombre a cantidadRegiones
+    int getSizeRegiones() { return regiones.size(); }
 };
 
 #endif
