@@ -37,10 +37,18 @@ void linkAdyacentes(int posIzqAdyacentes, int posDerAdyacentes, vector<Coord*> c
 		for (int posSegundoPais = posPrimerPais + 1; posSegundoPais < posDerAdyacentes + 1; posSegundoPais++)
 		{
 			//Se linkean los paises adyacentes
-			//coordenadas[posPrimerPais]->paisOriginal->paisesAdyacente.push_back(coordenadas[posSegundoPais]->paisOriginal);
-			//coordenadas[posSegundoPais]->paisOriginal->paisesAdyacente.push_back(coordenadas[posPrimerPais]->paisOriginal);
-			coordenadas[posPrimerPais]->paisOriginal->anadirPaisAdyacente(coordenadas[posSegundoPais]->paisOriginal);
-			coordenadas[posSegundoPais]->paisOriginal->anadirPaisAdyacente(coordenadas[posPrimerPais]->paisOriginal);
+			if(coordenadas[posPrimerPais]->paisOriginal->nombre == "Russia" && coordenadas[posSegundoPais]->paisOriginal->nombre == "Canada")
+			{
+				
+				Coord* coordenada1 = coordenadas[posPrimerPais];
+				Coord* coordenada2 = coordenadas[posSegundoPais];
+				std::cout << "Encontrado" << std::endl;
+			}
+			if(coordenadas[posPrimerPais]->paisOriginal != coordenadas[posSegundoPais]->paisOriginal)
+			{
+				coordenadas[posPrimerPais]->paisOriginal->anadirPaisAdyacente(coordenadas[posSegundoPais]->paisOriginal);
+				coordenadas[posSegundoPais]->paisOriginal->anadirPaisAdyacente(coordenadas[posPrimerPais]->paisOriginal);
+			}
 		}
 	}
 }
@@ -53,16 +61,18 @@ void revisarAdyacentes(int posIzq, int posDer, vector<Coord*> coordenadas)
 	int posDerAdyacentes = posIzq;
 	sort(coordenadas.begin() + posIzq, coordenadas.begin() + posDer, OrdenadoPorY());
 	int coordenadaYBase = coordenadas[posIzq]->coordY;
-	for (int posCoordenadaActual = posIzq; posCoordenadaActual < posDer; posCoordenadaActual++)
+	for (int posCoordenadaActual = posIzq + 1; posCoordenadaActual < posDer; posCoordenadaActual++)
 	{
+		
 		if (coordenadas[posCoordenadaActual]->coordY == coordenadaYBase)
 			posDerAdyacentes++;
 
 		else 
 		{	
 			if (posIzqAdyacentes != posDerAdyacentes)
-				linkAdyacentes(posIzqAdyacentes, posDerAdyacentes, coordenadas);
+				linkAdyacentes(posIzqAdyacentes, posDerAdyacentes - 1, coordenadas);
 			posIzqAdyacentes = posDerAdyacentes = posCoordenadaActual;
+			coordenadaYBase = coordenadas[posCoordenadaActual]->coordY;
 			
 		}
 	}
@@ -109,6 +119,8 @@ int main()
 	
 	vector<Coord*> coordenadas;
 	std::string pruebaCo;
+
+	double pruebita = 1204.24;
 
 	while(pais1 != NULL)
 	{

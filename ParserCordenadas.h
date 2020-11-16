@@ -2,21 +2,22 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <sstream>
 
 //string prueba ="m 12,13 2,-3 z m 1,1 2,2 z";
 
 
 //Funcion que recibe como parametros el String de Cordenadas X y Y, devuelde la Sumatoria de ambas
-std::tuple<std::vector<float>, std::vector<float>> ParserCordenadasXY(std::string pCordenadas) {
+std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::string pCordenadas) {
 
-    std::vector<float> CordenadasX{};
-    std::vector<float> CordenadasY{};
-    std::tuple<std::vector<float>, std::vector<float>> CordenadasXY{};
+    std::vector<double> CordenadasX{};
+    std::vector<double> CordenadasY{};
+    std::tuple<std::vector<double>, std::vector<double>> CordenadasXY{};
 
 
     int largoString = pCordenadas.length();
-    float sumatoriaX = 0;
-    float sumatoriaY = 0;
+    double sumatoriaX = 0;
+    double sumatoriaY = 0;
     std::string indiceX = "";
     std::string indiceY = "";
     int i = 2;
@@ -28,7 +29,11 @@ std::tuple<std::vector<float>, std::vector<float>> ParserCordenadasXY(std::strin
             indiceX += pCordenadas.at(i);
             i++;
             if (pCordenadas.at(i) == *",") {
-                sumatoriaX += stof(indiceX);
+                std::stringstream s;
+                s << indiceX;
+                double temp;
+                s >> temp;
+                //sumatoriaX += ::atof(indiceX);
                 CordenadasX.push_back(sumatoriaX);
                 i++;
                 while (pCordenadas.at(i) != *" ") {
