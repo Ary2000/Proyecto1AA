@@ -1,6 +1,7 @@
-#pragma once
+#ifndef COORD_H
+#define COORD_H
 
-#include "Pais.hpp"
+#include "Pais.h"
 
 class Coord
 {
@@ -18,3 +19,4 @@ public:
 	friend struct OrdenadoPorY;
 };
 
+#endif
