@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <tuple>
 
 #include "pugixml.hpp"
 #include "ParserCordenadas.h"
@@ -43,6 +44,7 @@ void linkAdyacentes(int posIzqAdyacentes, int posDerAdyacentes, vector<Coord*> c
 	{
 		for (int posSegundoPais = posPrimerPais + 1; posSegundoPais < posDerAdyacentes + 1; posSegundoPais++)
 		{
+			
 			//Se linkean los paises adyacentes
 			if(coordenadas[posPrimerPais]->paisOriginal->nombre == "Russia" && coordenadas[posSegundoPais]->paisOriginal->nombre == "Canada")
 			{
@@ -119,15 +121,15 @@ int main()
 	pugi::xml_node pais1 = doc.child("svg").child("path");
 	cout << "Load result: " << result.description() << endl << endl;
 
-	std::tuple<std::vector<float>, std::vector<float>> CordenadasPais{};
-	std::vector<float> CoX{};
-	std::vector<float> CoY{};
+	std::tuple<std::vector<double>, std::vector<double>> CordenadasPais{};
+	std::vector<double> CoX{};
+	std::vector<double> CoY{};
 	
 	vector<Coord*> coordenadas;
 	std::string pruebaCo;
 
 	Mundo* mundo = new Mundo();
-	/*
+
 	while(pais1 != NULL)
 	{
 		cout << pais1.attribute("id").value() << endl;
@@ -136,13 +138,13 @@ int main()
 		CoX = std::get<0>(CordenadasPais);
 		CoY = std::get<1>(CordenadasPais);
 		Pais* paisActual = new Pais(pais1.attribute("data-name").value());
-		//mundo->anadirPais(paisActual);
 		for (int i = 0; i < CoX.size(); i++)
-				coordenadas.push_back(new Coord(CoX.at(i), CoY.at(i), paisActual));
+			coordenadas.push_back(new Coord(CoX.at(i), CoY.at(i), paisActual));
 		pais1 = pais1.next_sibling();
 	}
-	*/
+
 	//Seccion prueba
+	/*
 	Pais* CostaRica = new Pais("Costa Rica");
 	Pais* Nicaragua = new Pais("Nicaragua");
 	Pais* Panama = new Pais("Panama");
@@ -173,6 +175,7 @@ int main()
 	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
 	coordenadas.push_back(new Coord(20, 20, Canada));
 	coordenadas.push_back(new Coord(1, 1, Espana));
+	*/
 
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;

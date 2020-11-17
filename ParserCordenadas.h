@@ -1,4 +1,7 @@
-#pragma once
+#ifndef PARSERCORDENADAS_H
+#define PARSERCORDENADAS_H
+
+
 #include <string>
 #include <vector>
 #include <tuple>
@@ -56,3 +59,5 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
     return CordenadasXY;
 
 }
+
+#endif
