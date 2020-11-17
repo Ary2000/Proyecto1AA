@@ -6,8 +6,6 @@
 #include <vector>
 #include <tuple>
 
-//string prueba ="m 12,13 2,-3 z m 1,1 2,2 z";
-
 
 //Funcion que recibe como parametros el String de Cordenadas X y Y, devuelde la Sumatoria de ambas
 std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::string pCordenadas) {
@@ -43,8 +41,14 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
                 indiceX = "";
                 i++;
 
+                if (pCordenadas.at(i) == *"l")
+                {
+                    i+=2;
+                }
             }
         }
+
+
         if (pCordenadas.at(i) == *"z")
         {
             i += 4;
