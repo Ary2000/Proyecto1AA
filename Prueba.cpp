@@ -69,7 +69,7 @@ void revisarAdyacentes(int posIzq, int posDer, vector<Coord*> coordenadas)
 	int posIzqAdyacentes = posIzq;
 	int posDerAdyacentes = posIzq;
 	sort(coordenadas.begin() + posIzq, coordenadas.begin() + posDer, OrdenadoPorY());
-	int coordenadaYBase = coordenadas[posIzq]->coordY;
+	double coordenadaYBase = coordenadas[posIzq]->coordY;
 	for (int posCoordenadaActual = posIzq + 1; posCoordenadaActual < posDer; posCoordenadaActual++)
 	{
 		
@@ -79,7 +79,7 @@ void revisarAdyacentes(int posIzq, int posDer, vector<Coord*> coordenadas)
 		else 
 		{	
 			if (posIzqAdyacentes != posDerAdyacentes)
-				linkAdyacentes(posIzqAdyacentes, posDerAdyacentes - 1, coordenadas);
+				linkAdyacentes(posIzqAdyacentes, posDerAdyacentes, coordenadas);
 			posIzqAdyacentes = posDerAdyacentes = posCoordenadaActual;
 			coordenadaYBase = coordenadas[posCoordenadaActual]->coordY;
 			
@@ -95,9 +95,11 @@ void contarPosiblesAdyacentes(vector<Coord*> coordenadas)
 {
 	int posIzq = 0;
 	int posDer = 0;
-	int coordXPrincipal = coordenadas[0]->coordX;
+	double coordXPrincipal = coordenadas[0]->coordX;
 	for (int coordenadaActual = 1; coordenadaActual < coordenadas.size(); coordenadaActual++)
 	{
+		if(coordenadas[coordenadaActual]->coordX == 482)
+			Coord* cordenada = coordenadas[coordenadaActual];
 		if (coordenadas[coordenadaActual]->coordX == coordXPrincipal)
 			posDer++;
 
@@ -176,7 +178,7 @@ int main()
 	coordenadas.push_back(new Coord(20, 20, Canada));
 	coordenadas.push_back(new Coord(1, 1, Espana));
 	*/
-
+	double doble = 482.9;
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
