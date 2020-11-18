@@ -52,8 +52,6 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
         if (pCordenadas.at(i) == *"z")
         {
             i += 4;
-            sumatoriaX = 0;
-            sumatoriaY = 0;
             indiceY = " ";
             indiceX = " ";
         }
