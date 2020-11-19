@@ -3,9 +3,22 @@
 
 using namespace std;
 
-AlgoritmoProgDina::AlgoritmoProgDina(Mundo* mundo)
+AlgoritmoProgDina::AlgoritmoProgDina(Mundo* mundo,int pNumColores)
 {
     this->mundo = mundo;
+	this->pNumColores = pNumColores;
+}
+
+std::vector<int> AlgoritmoProgDina::hacerVectorColores(int pNumColores){
+
+	std::vector<int> vectorColores{};
+
+	for (int i = 1; i <= pNumColores; i++)
+	{
+		vectorColores.push_back(i);
+	}
+	vectorColores.push_back(0);
+	return vectorColores;
 }
 
 std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vector<int> pColoresUsar,std::vector<int> pContadorColores){
@@ -123,8 +136,11 @@ std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vect
 }
 
 void AlgoritmoProgDina::realizarProgDina(){
+
+
 	
-	std::vector<int> ColoresPos{1,2,0};
+	std::vector<int> ColoresPos{};
+	ColoresPos = hacerVectorColores(pNumColores);
 	std::vector<int> ColoresUsados{0,0,0,0,0,0,0,0,0,0,0,0};;
 	std::vector<int> ReinicioColoresPos = ColoresPos;
 	std::tuple<int, std::vector<int>> RespuestasColores{};

@@ -19,10 +19,12 @@ class AlgoritmoProgDina
 {
     private:
     Mundo* mundo;
+    int pNumColores;
     std::tuple<int, std::vector<int>> asignarMejorColor(std::vector<int> pColoresUsar,std::vector<int> pContadorColores);
+    std::vector<int> hacerVectorColores(int pNumColores);
 
     public:
-    AlgoritmoProgDina(Mundo* mundo);
+    AlgoritmoProgDina(Mundo* mundo,int pNumColores);
 
     void realizarProgDina();
     

@@ -19,9 +19,11 @@ class AlgoritmoDV
 {
     private:
     Mundo* mundo;
+    int pNumColores;
+    std::vector<int> hacerVectorColores(int pNumColores);
 
     public:
-    AlgoritmoDV(Mundo* mundo);
+    AlgoritmoDV(Mundo* mundo,int pNumColores);
     void realizarDV();
     
     

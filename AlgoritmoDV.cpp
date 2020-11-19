@@ -3,15 +3,30 @@
 
 using namespace std;
 
-AlgoritmoDV::AlgoritmoDV(Mundo* mundo)
+AlgoritmoDV::AlgoritmoDV(Mundo* mundo,int pNumColores)
 {
     this->mundo = mundo;
+	this->pNumColores = pNumColores;
+	
 }
 
 
+std::vector<int> AlgoritmoDV::hacerVectorColores(int pNumColores){
+
+	std::vector<int> vectorColores{};
+
+	for (int i = 1; i <= pNumColores; i++)
+	{
+		vectorColores.push_back(i);
+	}
+	vectorColores.push_back(0);
+	return vectorColores;
+}
+
 void AlgoritmoDV::realizarDV(){
 
-    std::vector<int> ColoresPos{1,2,3,0};
+    std::vector<int> ColoresPos{};
+	ColoresPos = hacerVectorColores(pNumColores);
 	std::vector<int> ReinicioColoresPos = ColoresPos;
 	int indiceRegion = mundo->getSizeRegiones();
 
