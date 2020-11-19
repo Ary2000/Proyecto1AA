@@ -4,9 +4,14 @@
 #include <string>
 #include <vector>
 
+#include "pugixml.hpp"
+
 class Pais
 {
-//private:
+private:
+	pugi::xml_node nodeDV;
+	pugi::xml_node nodePD;
+	pugi::xml_node nodeBT;
 public:
 	std::string nombre;
 	std::vector<Pais*> paisesAdyacente;
@@ -14,7 +19,7 @@ public:
 	bool pasadoBT;
 	int colorBT;
 
-	Pais(std::string nombre);
+	Pais(std::string nombre, pugi::xml_node nodeDV, pugi::xml_node nodePD, pugi::xml_node nodeBT);
 	void anadirPaisAdyacente(Pais* paisAdyacente);
 	bool haSidoVisitado() { return visitadoRegiones; }
 	int marcarAdyacentes();

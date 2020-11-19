@@ -18,6 +18,7 @@ class AlgoritmoBT
 
     BTColor* realizarSolucionesBT(Pais* pais, int tamRegion);
     BTColor* realizarSolucionesBTColores(Pais* pais, int tamRegion, int sePintoBlanco);
+    void lazyWritting(BTColor* colores);
 
     public:
     AlgoritmoBT(Mundo* mundo);

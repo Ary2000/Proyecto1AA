@@ -79,5 +79,8 @@ void AlgoritmoBT::realizarBT()
 {
     std::vector<BTColor*> respuestas;
     for(int indiceRegiones = 0; indiceRegiones < mundo->getSizeRegiones(); indiceRegiones++)
-        respuestas.push_back(realizarSolucionesBT(mundo->getRegion(indiceRegiones), mundo->getSizeRegion(indiceRegiones)));
+    {
+        realizarSolucionesBT(mundo->getRegion(indiceRegiones), mundo->getSizeRegion(indiceRegiones));
+
+    }
 }

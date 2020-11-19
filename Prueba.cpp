@@ -11,6 +11,7 @@
 #include "Coord.h"
 #include "Mundo.h"
 #include "AlgoritmoBT.h"
+#include "CrearWorld.h"
 
 #include "Pais.cpp"
 #include "Coord.cpp"
@@ -70,7 +71,7 @@ void revisarAdyacentes(int posIzq, int posDer, vector<Coord*> coordenadas)
 	int posDerAdyacentes = posIzq;
 	sort(coordenadas.begin() + posIzq, coordenadas.begin() + posDer, OrdenadoPorY());
 	double coordenadaYBase = coordenadas[posIzq]->coordY;
-	for (int posCoordenadaActual = posIzq + 1; posCoordenadaActual < posDer; posCoordenadaActual++)
+	for (int posCoordenadaActual = posIzq + 1; posCoordenadaActual <= posDer; posCoordenadaActual++)
 	{
 		
 		if (coordenadas[posCoordenadaActual]->coordY == coordenadaYBase)
@@ -98,8 +99,6 @@ void contarPosiblesAdyacentes(vector<Coord*> coordenadas)
 	double coordXPrincipal = coordenadas[0]->coordX;
 	for (int coordenadaActual = 1; coordenadaActual < coordenadas.size(); coordenadaActual++)
 	{
-		if(coordenadas[coordenadaActual]->coordX == 482)
-			Coord* cordenada = coordenadas[coordenadaActual];
 		if (coordenadas[coordenadaActual]->coordX == coordXPrincipal)
 			posDer++;
 
@@ -121,7 +120,6 @@ int main()
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file("world.svg");
 	pugi::xml_node pais1 = doc.child("svg").child("path");
-	cout << "Load result: " << result.description() << endl << endl;
 
 	std::tuple<std::vector<double>, std::vector<double>> CordenadasPais{};
 	std::vector<double> CoX{};
@@ -130,55 +128,38 @@ int main()
 	vector<Coord*> coordenadas;
 	std::string pruebaCo;
 
+	crearCopiasWorld();
+
+	pugi::xml_document docDV;
+	pugi::xml_parse_result resultDV = docDV.load_file("worldDvideVenceras.svg");
+	pugi::xml_node paisDV = docDV.child("svg").child("path");
+
+	pugi::xml_document docPD;
+	pugi::xml_parse_result resultPD = docPD.load_file("worldProgDinamica.svg");
+	pugi::xml_node paisPD = docPD.child("svg").child("path");
+
+	pugi::xml_document docBacktracking;
+	pugi::xml_parse_result resultBT = docBacktracking.load_file("worldBackTracking.svg");
+	pugi::xml_node paisBT = docBacktracking.child("svg").child("path");
+
 	Mundo* mundo = new Mundo();
 
 	while(pais1 != NULL)
 	{
-		cout << pais1.attribute("id").value() << endl;
 		pruebaCo = pais1.attribute("d").value();
 		CordenadasPais = ParserCordenadasXY(pruebaCo);
 		CoX = std::get<0>(CordenadasPais);
 		CoY = std::get<1>(CordenadasPais);
-		Pais* paisActual = new Pais(pais1.attribute("data-name").value());
+		Pais* paisActual = new Pais(pais1.attribute("data-name").value(), paisDV, paisPD, paisBT);
 		for (int i = 0; i < CoX.size(); i++)
 			coordenadas.push_back(new Coord(CoX.at(i), CoY.at(i), paisActual));
+		mundo->anadirPais(paisActual);
 		pais1 = pais1.next_sibling();
+		paisDV = paisDV.next_sibling();
+		paisPD = paisPD.next_sibling();
+		paisBT = paisBT.next_sibling();
 	}
 
-	//Seccion prueba
-	/*
-	Pais* CostaRica = new Pais("Costa Rica");
-	Pais* Nicaragua = new Pais("Nicaragua");
-	Pais* Panama = new Pais("Panama");
-	Pais* Colombia = new Pais("Colombia");
-	Pais* EstadosUnidos = new Pais("Estados Unidos");
-	Pais* Canada = new Pais("Canada");
-	Pais* Espana = new Pais("Espana");
-	Pais* Ecuador = new Pais("Ecuador");
-
-	mundo->anadirPais(CostaRica);
-	mundo->anadirPais(Nicaragua);
-	mundo->anadirPais(Panama);
-	mundo->anadirPais(Colombia);
-	mundo->anadirPais(EstadosUnidos);
-	mundo->anadirPais(Canada);
-	mundo->anadirPais(Espana);
-	mundo->anadirPais(Ecuador);
-
-	coordenadas.push_back(new Coord(182, 20, CostaRica));
-	coordenadas.push_back(new Coord(182, 20, Nicaragua));
-	coordenadas.push_back(new Coord(170, 10, CostaRica));
-	coordenadas.push_back(new Coord(170, 10, Panama));
-	coordenadas.push_back(new Coord(60, 60, Panama));
-	coordenadas.push_back(new Coord(60, 60, Colombia));
-	coordenadas.push_back(new Coord(90, 90, Colombia));
-	coordenadas.push_back(new Coord(90, 90, Ecuador));
-	
-	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
-	coordenadas.push_back(new Coord(20, 20, Canada));
-	coordenadas.push_back(new Coord(1, 1, Espana));
-	*/
-	double doble = 482.9;
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
