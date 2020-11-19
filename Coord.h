@@ -12,7 +12,7 @@ public:
 	Pais* paisOriginal;
 
 
-	Coord(int coordX, int coordY, Pais* paisOriginal);
+	Coord(double coordX, double coordY, Pais* paisOriginal);
 	void linkPais(Pais* paisAdyacente);
 
 	friend struct OrdenadoPorX;

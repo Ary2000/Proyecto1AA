@@ -28,15 +28,16 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
             indiceX += pCordenadas.at(i);
             i++;
             if (pCordenadas.at(i) == *",") {
-                sumatoriaX += stof(indiceX);
+                sumatoriaX += stod(indiceX);
                 CordenadasX.push_back(sumatoriaX);
                 i++;
                 while (pCordenadas.at(i) != *" ") {
                     indiceY += pCordenadas.at(i);
                     i++;
                 }
-                sumatoriaY += stof(indiceY);
+                sumatoriaY += stod(indiceY);
                 CordenadasY.push_back(sumatoriaY);
+                //std::cout << sumatoriaX << ' ' << sumatoriaY << std::endl;
                 indiceY = "";
                 indiceX = "";
                 i++;

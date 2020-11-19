@@ -1,6 +1,6 @@
 #include "Coord.h"
 
-Coord::Coord(int coordX, int coordY, Pais* paisOriginal) 
+Coord::Coord(double coordX, double coordY, Pais* paisOriginal) 
 {
 	this->coordX = coordX;
 	this->coordY = coordY;
