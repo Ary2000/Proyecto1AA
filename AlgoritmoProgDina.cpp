@@ -23,7 +23,7 @@ std::vector<int> AlgoritmoProgDina::hacerVectorColores(int pNumColores){
 
 std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vector<int> pColoresUsar,std::vector<int> pContadorColores){
 
-	//Ej : {1,2,3,0} ,{0,0,0,0,0,0,0,0,0,0,0}
+	//Ej : {2,0,0,0} ,{0,0,0,0,0,0,0,0,0,0,0}
 	std::tuple<int, std::vector<int>> respuestaColor{};
 	int indiceRevisar = 0;
 	int menorAparecion = 0;
@@ -31,11 +31,13 @@ std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vect
 	if (pColoresUsar[0]==0)
 	{
 		pContadorColores[11]= pContadorColores[11]+1;
+		respuestaColor = make_tuple(colorUsar,pContadorColores);
+    	return respuestaColor;
 	}
 	
 	if (pColoresUsar[0]!=0)
 	{
-		menorAparecion=pContadorColores[0];
+		menorAparecion=pContadorColores[pColoresUsar[0]-1];
 	}
 	
 	while (indiceRevisar<pColoresUsar.size()){
@@ -118,7 +120,9 @@ std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vect
 				menorAparecion=pContadorColores[10];
 			}
 			break;
-		
+		case 0:
+			break;
+	
 
 		default:
 			break;
