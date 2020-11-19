@@ -141,7 +141,7 @@ void AlgoritmoProgDina::realizarProgDina(){
 	
 	std::vector<int> ColoresPos{};
 	ColoresPos = hacerVectorColores(pNumColores);
-	std::vector<int> ColoresUsados{0,0,0,0,0,0,0,0,0,0,0,0};;
+	std::vector<int> ColoresUsados{0,0,0,0,0,0,0,0,0,0,0,0};
 	std::vector<int> ReinicioColoresPos = ColoresPos;
 	std::tuple<int, std::vector<int>> RespuestasColores{};
 
@@ -223,6 +223,6 @@ void AlgoritmoProgDina::realizarProgDina(){
 		cout << lista[i]->colorBT << endl;
 	}
 
-		
+	cout << "Total de Paises en Blanco " << ColoresUsados[11]<<endl;
 	
 }

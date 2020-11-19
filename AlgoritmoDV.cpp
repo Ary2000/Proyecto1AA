@@ -29,6 +29,7 @@ void AlgoritmoDV::realizarDV(){
 	ColoresPos = hacerVectorColores(pNumColores);
 	std::vector<int> ReinicioColoresPos = ColoresPos;
 	int indiceRegion = mundo->getSizeRegiones();
+	int contadorBlancos=0;
 
 	
 	int comprobar,comprobar2,comprobarColor;
@@ -69,6 +70,11 @@ void AlgoritmoDV::realizarDV(){
 			lista.push_back(actual);
 			actual->colorBT=ColoresPos[0];
 			cout<< actual->colorBT<< ", ";
+			if (actual->colorBT==0)
+			{
+				contadorBlancos++;
+			}
+			
 			ColoresPos=ReinicioColoresPos;
 			//Aux para 
 			int aux;
@@ -95,5 +101,6 @@ void AlgoritmoDV::realizarDV(){
 		}
 	}
 	
+	cout << "Total de Paises en Blanco " << contadorBlancos <<endl;
 }
 
