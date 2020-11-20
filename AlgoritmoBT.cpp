@@ -1,10 +1,11 @@
 #include "AlgoritmoBT.h"
 
-AlgoritmoBT::AlgoritmoBT(Mundo* mundo, int cantidadColores, std::vector<std::string> todosLosColores)
+AlgoritmoBT::AlgoritmoBT(Mundo* mundo, int cantidadColores, std::vector<std::string> todosLosColores, ManejadorDocs* manejador)
 {
     this->mundo = mundo;
     this->cantidadColores = cantidadColores;
     this->todosLosColores = todosLosColores;
+    this->manejador = manejador;
     cantidadEspaciosMinimos = -1;
 }
 /*
@@ -242,7 +243,7 @@ void AlgoritmoBT::realizarBT()
 
 void AlgoritmoBT::realizarBT()
 {
-    std::vector<BTColor*> respuestas;
+    //std::vector<BTColor*> respuestas;
     for(int indiceRegiones = 0; indiceRegiones < mundo->getSizeRegiones(); indiceRegiones++)
     {
         conseguirPaisesRegion(mundo->getRegion(indiceRegiones), 0);
@@ -252,10 +253,13 @@ void AlgoritmoBT::realizarBT()
             {
                 crearCamino(*iteradorPaisesRegion);
                 realizarSolucionesBT(*iteradorPaisesRegion, nullptr, 0);
-                respuestas.push_back(mejorBT);
+                //respuestas.push_back(mejorBT);
+                lazyWritting(mejorBT);
+                manejador->docBT.save_file("worldBackTracking.svg");
                 mejorBT = nullptr;
                 for(auto iteradorCamino = camino.begin(); iteradorCamino != camino.end(); iteradorCamino++)
                 {
+                    
                     (*iteradorCamino)->setVisitadoBT(true);
                     (*iteradorCamino)->esCamino = true;
                 }
@@ -303,3 +307,4 @@ void AlgoritmoBT::lazyWritting(BTColor* colores)
         colores = colores->getSiguienteColor();
     }
 }
+

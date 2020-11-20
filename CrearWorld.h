@@ -28,7 +28,7 @@ void crearCopiasWorld(){
     std::string pathCopiar2= "copy ";
     std::string svgWolrd = "\\\\world.svg ";
     std::string svgWolrdDivideVenceras = "\\\\worldDivideVenceras.svg ";
-    std::string svgWolrdBackTraking = "\\\\worldBackTraking.svg ";
+    std::string svgWolrdBackTraking = "\\\\worldBackTracking.svg ";
     std::string svgWolrdProgDinamica = "\\\\worldProgDinamica.svg ";
     for (int i = 0; i < path.size(); i++)
     {

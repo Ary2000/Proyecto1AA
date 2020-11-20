@@ -35,3 +35,11 @@ int Pais::marcarAdyacentes()
             tamanoRegion += (*iteradorAdyacentes)->marcarAdyacentes();
     return tamanoRegion;
 }
+
+void Pais::pintarPaisBT(std::string colorAPoner)
+{ 
+	int indiceBack = colorAPoner.length();
+	char arrayBackTraking[indiceBack + 1];
+	strcpy(arrayBackTraking, colorAPoner.c_str());
+	attrBT.set_value(arrayBackTraking); 
+}

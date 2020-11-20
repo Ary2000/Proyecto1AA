@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "pugixml.hpp"
 
@@ -27,7 +28,7 @@ public:
 	void anadirPaisAdyacente(Pais* paisAdyacente);
 	bool haSidoVisitado() { return visitadoRegiones; }
 	int marcarAdyacentes();
-	void pintarPaisBT(std::string colorAPoner) { attrBT.set_value("colorAPoner"); }
+	void pintarPaisBT(std::string colorAPoner);
 
 	//set
 	void setVisitadoBT(bool estadoNuevo) { pasadoBT = estadoNuevo; }

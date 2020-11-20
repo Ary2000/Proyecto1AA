@@ -9,6 +9,9 @@
 #include "Mundo.h"
 #include "BTColor.h"
 
+#include "pugixml.hpp"
+#include "manejadorDocs.h"
+
 class AlgoritmoBT
 {
     private:
@@ -18,6 +21,7 @@ class AlgoritmoBT
     std::vector<std::string> todosLosColores;
     BTColor* mejorBT = NULL;
     std::vector<Pais*> paisesDeRegion;
+    ManejadorDocs* manejador;
 
     std::vector<std::vector<int>> coloresRegiones;
 
@@ -38,7 +42,7 @@ class AlgoritmoBT
     public:
     void crearPosiblesCombinaciones(Pais* pais, int paisesVisitados);
     void crearPCBase(Pais* pais);
-    AlgoritmoBT(Mundo* mundo, int canitdadColores, std::vector<std::string> todosLosColores);
+    AlgoritmoBT(Mundo* mundo, int cantidadColores, std::vector<std::string> todosLosColores, ManejadorDocs* manejador);
     void realizarBT();
     
 };

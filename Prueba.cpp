@@ -12,12 +12,14 @@
 #include "Mundo.h"
 #include "AlgoritmoBT.h"
 #include "CrearWorld.h"
+#include "manejadorDocs.h"
 
 #include "Pais.cpp"
 #include "Coord.cpp"
 #include "Mundo.cpp"
 #include "AlgoritmoBT.cpp"
 #include "BTColor.cpp"
+#include "manejadorDocs.cpp"
 
 #define COLORES 5
 
@@ -130,17 +132,18 @@ int main()
 
 	crearCopiasWorld();
 
-	pugi::xml_document docDV;
-	pugi::xml_parse_result resultDV = docDV.load_file("worldDvideVenceras.svg");
-	pugi::xml_node paisDV = docDV.child("svg").child("path");
+	//pugi::xml_document docDV;
+	//pugi::xml_parse_result resultDV = docDV.load_file("worldDivideVenceras.svg");
+	ManejadorDocs* manejador = new ManejadorDocs("worldDivideVenceras.svg", "worldProgDinamica.svg", "worldBackTracking.svg");
+	pugi::xml_node paisDV = manejador->docDV.child("svg").child("path");
 
-	pugi::xml_document docPD;
-	pugi::xml_parse_result resultPD = docPD.load_file("worldProgDinamica.svg");
-	pugi::xml_node paisPD = docPD.child("svg").child("path");
+	//pugi::xml_document docPD;
+	//pugi::xml_parse_result resultPD = docPD.load_file("worldProgDinamica.svg");
+	pugi::xml_node paisPD = manejador->docPD.child("svg").child("path");
 
-	pugi::xml_document docBacktracking;
-	pugi::xml_parse_result resultBT = docBacktracking.load_file("worldBackTracking.svg");
-	pugi::xml_node paisBT = docBacktracking.child("svg").child("path");
+	//pugi::xml_document docBacktracking;
+	//pugi::xml_parse_result resultBT = docBacktracking.load_file("worldBackTracking.svg");
+	pugi::xml_node paisBT = manejador->docBT.child("svg").child("path");
 
 	Mundo* mundo = new Mundo();
 	vector<string> todosLosColores = { "fill:#FF0000;fill-rule:evenodd",
@@ -216,10 +219,10 @@ int main()
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
 	mundo->realizarRegiones();
-	AlgoritmoBT algoritmoBT(mundo, COLORES, todosLosColores);
+	AlgoritmoBT algoritmoBT(mundo, COLORES, todosLosColores, manejador);
 	algoritmoBT.realizarBT();
 
-	docBacktracking.save_file("worldBackTracking.svg");
+	//docBacktracking.save_file("worldBackTracking.svg");
 
 	return 0;
 }
