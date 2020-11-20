@@ -11,6 +11,8 @@
 #include "Coord.h"
 #include "Mundo.h"
 #include "AlgoritmoBT.h"
+#include "AlgoritmoDV.h"
+#include "AlgoritmoProgDina.h"
 #include "CrearWorld.h"
 #include "manejadorDocs.h"
 
@@ -18,10 +20,12 @@
 #include "Coord.cpp"
 #include "Mundo.cpp"
 #include "AlgoritmoBT.cpp"
+#include "AlgoritmoDV.cpp"
+#include "AlgoritmoProgDina.cpp"
 #include "BTColor.cpp"
 #include "manejadorDocs.cpp"
 
-#define COLORES 5
+#define COLORES 11
 
 using namespace std;
 
@@ -219,10 +223,13 @@ int main()
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
 	mundo->realizarRegiones();
-	AlgoritmoBT algoritmoBT(mundo, COLORES, todosLosColores, manejador);
-	algoritmoBT.realizarBT();
 
-	//docBacktracking.save_file("worldBackTracking.svg");
+	AlgoritmoDV algoritmoDV(mundo, COLORES, todosLosColores, manejador);
+	algoritmoDV.realizarDV();
+
+	AlgoritmoProgDina algoritmoProgDina(mundo, COLORES, todosLosColores, manejador);
+	algoritmoProgDina.realizarProgDina();
+
 
 	return 0;
 }

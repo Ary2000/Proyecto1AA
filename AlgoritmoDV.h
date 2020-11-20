@@ -22,9 +22,10 @@ class AlgoritmoDV
     int pNumColores;
     std::vector<std::string> todosLosColores;
     std::vector<int> hacerVectorColores(int pNumColores);
+    ManejadorDocs* manejador;
 
     public:
-    AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores);
+    AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores, ManejadorDocs* manejador);
     void realizarDV();
     
     

@@ -3,11 +3,12 @@
 
 using namespace std;
 
-AlgoritmoDV::AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores)
+AlgoritmoDV::AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores, ManejadorDocs* manejador)
 {
     this->mundo = mundo;
 	this->pNumColores = pNumColores;
 	this->todosLosColores = todosLosColores;
+	this->manejador = manejador;
 	
 }
 
@@ -35,6 +36,7 @@ void AlgoritmoDV::realizarDV(){
 	
 	int comprobar,comprobar2,comprobarColor;
 	Pais* actual;
+	Pais* actualBuffer;
 	
 	std::stack<Pais*> pila;
 	std::vector<Pais*> lista;
@@ -48,20 +50,18 @@ void AlgoritmoDV::realizarDV(){
 		pila.push(PrimerPais);
 
 		while (!pila.empty()){
-        comprobar = 0;
-
-		actual = pila.top();
-		pila.pop();
-
-		for (i=lista.begin(); i!=lista.end(); i++){
-
-			if(*i == actual){
-                comprobar = 1;
+			comprobar = 0;
+			actual = pila.top();
+			pila.pop();
+			
+			for (i=lista.begin(); i!=lista.end(); i++){
+				if(*i == actual){
+					comprobar = 1;
             }
         }
 		if (comprobar == 0){
 
-			cout<< actual->nombre<< ", ";
+			//cout<< actual->nombre<< ", ";
 			for (int i = 0; i < actual->paisesAdyacente.size(); i++){
 
                 new_end = remove(ColoresPos.begin(), ColoresPos.end(), actual->paisesAdyacente[i]->colorBT);
@@ -70,14 +70,7 @@ void AlgoritmoDV::realizarDV(){
 				
 			lista.push_back(actual);
 			actual->colorBT=ColoresPos[0];
-			cout<< actual->colorBT<< ", ";
-			//Pintar en svg
-			std::string stringChar= todosLosColores[actual->colorBT];
-			int indiceDV = stringChar.length();
-   			char arrayDiVe[indiceDV + 1];
-    		strcpy(arrayDiVe, stringChar.c_str());
-
-			actual->attrDV = arrayDiVe;
+			//cout<< actual->colorBT<< ", ";
 
 			if (actual->colorBT==0)
 			{
@@ -108,8 +101,18 @@ void AlgoritmoDV::realizarDV(){
 				}
 			}
 		}
+		//lazy writting
+		for (i=lista.begin(); i!=lista.end(); i++){
+			actualBuffer=*i;
+			if (actualBuffer->colorBT!=0)
+			{
+				actualBuffer->pintarPaisDV(todosLosColores[actualBuffer->colorBT-1]);
+				manejador->docDV.save_file("worldDivideVenceras.svg");
+			}
+		}
+		lista={};
 	}
-	
-	cout << "Total de Paises en Blanco " << contadorBlancos <<endl;
+	cout << "Total de Paises en Blanco Algoritmo Programacion Divide y Venceras " << contadorBlancos <<endl;
+
 }
 

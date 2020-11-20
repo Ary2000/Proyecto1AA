@@ -3,10 +3,12 @@
 
 using namespace std;
 
-AlgoritmoProgDina::AlgoritmoProgDina(Mundo* mundo,int pNumColores)
+AlgoritmoProgDina::AlgoritmoProgDina(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores, ManejadorDocs* manejador)
 {
     this->mundo = mundo;
 	this->pNumColores = pNumColores;
+	this->todosLosColores = todosLosColores;
+	this->manejador = manejador;
 }
 
 std::vector<int> AlgoritmoProgDina::hacerVectorColores(int pNumColores){
@@ -152,6 +154,7 @@ void AlgoritmoProgDina::realizarProgDina(){
 	int comprobar,comprobar2,comprobarColor;
 	int indiceRegion = mundo->getSizeRegiones();
 	Pais* actual;
+	Pais* actualBuffer;
 	std::stack<Pais*> pila;
 	std::vector<Pais*> lista;
 	std::vector<Pais*>::iterator i;
@@ -163,21 +166,18 @@ void AlgoritmoProgDina::realizarProgDina(){
 		pila.push(PrimerPais);
 
 		while (!pila.empty()){
-
 			comprobar = 0;
-
 			actual = pila.top();
 			pila.pop();
 
-			for (i=lista.begin(); i!=lista.end(); i++)
-			{
+			for (i=lista.begin(); i!=lista.end(); i++){
 				if(*i == actual){
 					comprobar = 1;
 				}
 			}
 			if (comprobar == 0)
 			{
-				cout<< actual->nombre<< ", ";
+				//cout<< actual->nombre<< ", ";
 				for (int i = 0; i < actual->paisesAdyacente.size(); i++)
 				{
 					new_end = remove(ColoresPos.begin(), ColoresPos.end(), actual->paisesAdyacente[i]->colorBT);
@@ -212,21 +212,21 @@ void AlgoritmoProgDina::realizarProgDina(){
 					}
 					indiceAux++;
 				}
-				
-
 			}
-			
 		}
+		
+		//lazy writting
+		for (i=lista.begin(); i!=lista.end(); i++){
+			actualBuffer=*i;
+			if (actualBuffer->colorBT!=0)
+			{
+				actualBuffer->pintarPaisPD(todosLosColores[actualBuffer->colorBT-1]);
+				manejador->docPD.save_file("worldProgDinamica.svg");
+			}
+		}
+		lista={};
+		
 	}
-	
-
-
-	for (int i = 0; i < lista.size(); i++)
-	{
-		cout << lista[i]->nombre << " codigo del pais ";
-		cout << lista[i]->colorBT << endl;
-	}
-
-	cout << "Total de Paises en Blanco " << ColoresUsados[11]<<endl;
+	cout << "Total de Paises en Blanco Algoritomo Programacion Dinamica " << ColoresUsados[11]<<endl;
 	
 }

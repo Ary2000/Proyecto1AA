@@ -43,3 +43,19 @@ void Pais::pintarPaisBT(std::string colorAPoner)
 	strcpy(arrayBackTraking, colorAPoner.c_str());
 	attrBT.set_value(arrayBackTraking); 
 }
+
+void Pais::pintarPaisDV(std::string colorAPoner)
+{ 
+	int indiceBack = colorAPoner.length();
+	char arrayBackTraking[indiceBack + 1];
+	strcpy(arrayBackTraking, colorAPoner.c_str());
+	attrDV.set_value(arrayBackTraking); 
+}
+
+void Pais::pintarPaisPD(std::string colorAPoner)
+{ 
+	int indiceBack = colorAPoner.length();
+	char arrayBackTraking[indiceBack + 1];
+	strcpy(arrayBackTraking, colorAPoner.c_str());
+	attrPD.set_value(arrayBackTraking); 
+}

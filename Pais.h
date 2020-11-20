@@ -29,6 +29,8 @@ public:
 	bool haSidoVisitado() { return visitadoRegiones; }
 	int marcarAdyacentes();
 	void pintarPaisBT(std::string colorAPoner);
+	void pintarPaisDV(std::string colorAPoner);
+	void pintarPaisPD(std::string colorAPoner);
 
 	//set
 	void setVisitadoBT(bool estadoNuevo) { pasadoBT = estadoNuevo; }
