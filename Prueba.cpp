@@ -19,7 +19,7 @@
 #include "AlgoritmoBT.cpp"
 #include "BTColor.cpp"
 
-#define COLORES 4
+#define COLORES 5
 
 using namespace std;
 
@@ -155,7 +155,7 @@ int main()
 									   "fill:#9A7606;fill-rule:evenodd",
 									   "fill:#007E7E;fill-rule:evenodd" };
 
-	/*
+	
 	while(pais1 != NULL)
 	{
 		pruebaCo = pais1.attribute("d").value();
@@ -171,8 +171,9 @@ int main()
 		paisPD = paisPD.next_sibling();
 		paisBT = paisBT.next_sibling();
 	}
-	*/
+	
 
+	/*
 	Pais* CostaRica = new Pais("Costa Rica");
 	Pais* Nicaragua = new Pais("Nicaragua");
 	Pais* Panama = new Pais("Panama");
@@ -181,6 +182,7 @@ int main()
 	Pais* Canada = new Pais("Canada");
 	Pais* Espana = new Pais("Espana");
 	Pais* Ecuador = new Pais("Ecuador");
+	Pais* Brasil = new Pais("Brasil");
 
 	mundo->anadirPais(CostaRica);
 	mundo->anadirPais(Nicaragua);
@@ -190,6 +192,7 @@ int main()
 	mundo->anadirPais(Canada);
 	mundo->anadirPais(Espana);
 	mundo->anadirPais(Ecuador);
+	mundo->anadirPais(Brasil);
 
 	coordenadas.push_back(new Coord(182, 20, CostaRica));
 	coordenadas.push_back(new Coord(182, 20, Nicaragua));
@@ -197,12 +200,17 @@ int main()
 	coordenadas.push_back(new Coord(170, 10, Panama));
 	coordenadas.push_back(new Coord(60, 60, Panama));
 	coordenadas.push_back(new Coord(60, 60, Colombia));
+	coordenadas.push_back(new Coord(50, 50, Colombia));
+	coordenadas.push_back(new Coord(50, 50, Brasil));
+	coordenadas.push_back(new Coord(140, 140, Brasil));
+	coordenadas.push_back(new Coord(140, 140, Ecuador));
 	coordenadas.push_back(new Coord(90, 90, Colombia));
 	coordenadas.push_back(new Coord(90, 90, Ecuador));
 	
 	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
 	coordenadas.push_back(new Coord(20, 20, Canada));
 	coordenadas.push_back(new Coord(1, 1, Espana));
+	*/
 
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;
