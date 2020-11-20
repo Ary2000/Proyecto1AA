@@ -3,10 +3,11 @@
 
 using namespace std;
 
-AlgoritmoDV::AlgoritmoDV(Mundo* mundo,int pNumColores)
+AlgoritmoDV::AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores)
 {
     this->mundo = mundo;
 	this->pNumColores = pNumColores;
+	this->todosLosColores = todosLosColores;
 	
 }
 
@@ -70,6 +71,14 @@ void AlgoritmoDV::realizarDV(){
 			lista.push_back(actual);
 			actual->colorBT=ColoresPos[0];
 			cout<< actual->colorBT<< ", ";
+			//Pintar en svg
+			std::string stringChar= todosLosColores[actual->colorBT];
+			int indiceDV = stringChar.length();
+   			char arrayDiVe[indiceDV + 1];
+    		strcpy(arrayDiVe, stringChar.c_str());
+
+			actual->attrDV = arrayDiVe;
+
 			if (actual->colorBT==0)
 			{
 				contadorBlancos++;

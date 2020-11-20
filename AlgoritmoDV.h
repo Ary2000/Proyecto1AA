@@ -20,10 +20,11 @@ class AlgoritmoDV
     private:
     Mundo* mundo;
     int pNumColores;
+    std::vector<std::string> todosLosColores;
     std::vector<int> hacerVectorColores(int pNumColores);
 
     public:
-    AlgoritmoDV(Mundo* mundo,int pNumColores);
+    AlgoritmoDV(Mundo* mundo,int pNumColores,std::vector<std::string> todosLosColores);
     void realizarDV();
     
     
