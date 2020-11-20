@@ -224,6 +224,9 @@ int main()
 	contarPosiblesAdyacentes(coordenadas);
 	mundo->realizarRegiones();
 
+	AlgoritmoBT algoritmoBT(mundo, COLORES, todosLosColores, manejador);
+	algoritmoBT.realizarBT();
+
 	AlgoritmoDV algoritmoDV(mundo, COLORES, todosLosColores, manejador);
 	algoritmoDV.realizarDV();
 
