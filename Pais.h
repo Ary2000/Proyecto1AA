@@ -17,6 +17,8 @@ public:
 	std::vector<Pais*> paisesAdyacente;
 	bool visitadoRegiones;
 	bool pasadoBT;
+	bool pasadoBTProcess = false;
+	bool esCamino = false;
 	int indexBT = -1;
 	int colorBT = -1;
 

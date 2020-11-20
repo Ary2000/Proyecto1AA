@@ -16,12 +16,28 @@ class AlgoritmoBT
     int cantidadEspaciosMinimos;
     int cantidadColores;
     std::vector<std::string> todosLosColores;
+    BTColor* mejorBT = NULL;
+    std::vector<Pais*> paisesDeRegion;
 
-    BTColor* realizarSolucionesBT(Pais* pais, int tamRegion);
-    BTColor* realizarSolucionesBTColores(Pais* pais, int tamRegion, int sePintoBlanco);
+    std::vector<std::vector<int>> coloresRegiones;
+
+    std::vector<int> vectorAuxiliar;
+
+    int cantidadBlancosTotal = 99999999999;
+    int tamanoRegionActual = 0;
+
+    std::vector<Pais*> camino;
+
+    BTColor* realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterior, int posicion);
+    BTColor* realizarSolucionesBTColores(Pais* pais, BTColor* resultadoAnterior, std::vector<Pais*> camino, int posicion);
+    void conseguirPaisesRegion(Pais* pais1, int indice);
+    void crearCamino(Pais* pais);
+    
     void lazyWritting(BTColor* colores);
 
     public:
+    void crearPosiblesCombinaciones(Pais* pais, int paisesVisitados);
+    void crearPCBase(Pais* pais);
     AlgoritmoBT(Mundo* mundo, int canitdadColores, std::vector<std::string> todosLosColores);
     void realizarBT();
     

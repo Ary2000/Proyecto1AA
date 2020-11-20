@@ -17,10 +17,11 @@ class BTColor
     BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados);
     BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados, BTColor* colorSiguiente);
 
-    void marcarSiguiente(BTColor* siguiente) { siguienteColor = siguiente; }
+    void marcarSiguiente(BTColor* siguiente);
     bool existePaisEnLosCambios(Pais* pais);
     void push_back(BTColor* ultimo);
     void pintarRegion();
+    void agregarVisitado() { paisesVisitados++; }
 
     //gets
     int getCantidadBlancos() { return cantidadBlancos; }
