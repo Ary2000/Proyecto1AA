@@ -1,14 +1,14 @@
 #include "Pais.h"
 
-Pais::Pais(std::string nombre, pugi::xml_node nodeDV, pugi::xml_node nodePD, pugi::xml_node nodeBT) 
+Pais::Pais(std::string nombre, pugi::xml_attribute attrDV, pugi::xml_attribute attrPD, pugi::xml_attribute attrBT) 
 { 
     this->nombre = nombre; 
     this->visitadoRegiones = false;
     this->pasadoBT = false;
     this->colorBT = -1;
-    this->nodeDV = nodeDV;
-    this->nodePD = nodePD;
-    this->nodeBT = nodeBT;
+    this->attrDV = attrDV;
+    this->attrPD = attrPD;
+    this->attrBT = attrBT;
 }
 
 void Pais::anadirPaisAdyacente(Pais* paisAdyacente)

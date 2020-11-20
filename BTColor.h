@@ -20,11 +20,14 @@ class BTColor
     void marcarSiguiente(BTColor* siguiente) { siguienteColor = siguiente; }
     bool existePaisEnLosCambios(Pais* pais);
     void push_back(BTColor* ultimo);
+    void pintarRegion();
 
     //gets
     int getCantidadBlancos() { return cantidadBlancos; }
     int getPaisesVisitados() { return paisesVisitados; }
+    int getColor() {return color; }
     Pais* getPaisAPintar() { return paisAColorear; }
+    BTColor* getSiguienteColor() { return siguienteColor; }
     
     //sets
     void setCantidadBlancos(int cantidadBlancos) { this->cantidadBlancos = cantidadBlancos; }

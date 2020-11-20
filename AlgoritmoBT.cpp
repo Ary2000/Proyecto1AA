@@ -1,11 +1,13 @@
 #include "AlgoritmoBT.h"
 
-AlgoritmoBT::AlgoritmoBT(Mundo* mundo)
+AlgoritmoBT::AlgoritmoBT(Mundo* mundo, int cantidadColores, std::vector<std::string> todosLosColores)
 {
     this->mundo = mundo;
+    this->cantidadColores = cantidadColores;
+    this->todosLosColores = todosLosColores;
     cantidadEspaciosMinimos = -1;
 }
-
+/*
 BTColor* AlgoritmoBT::realizarSolucionesBTColores(Pais* pais, int tamRegion, int sePintoBlanco)
 {
     BTColor* mejorResultado = nullptr;
@@ -49,11 +51,11 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, int tamRegion)
 {   
     int sePintoBlanco = 1;
     pais->setVisitadoBT(true);
-    std::vector<int> coloresPosibles(COLORES);
+    std::vector<int> coloresPosibles(cantidadColores);
     std::iota(std::begin(coloresPosibles), std::end(coloresPosibles), 0);
     //Se busca cuales colores hay alreadedor, talvez hacerlo metodo si tengo tiempo
     for(int indicePaisesAdyacentes = 0; indicePaisesAdyacentes < pais->paisesAdyacente.size(); indicePaisesAdyacentes++)
-        if(pais->paisesAdyacente[indicePaisesAdyacentes]->colorBT != -1 && pais->paisesAdyacente[indicePaisesAdyacentes]->colorBT != COLORES + 1)
+        if(pais->paisesAdyacente[indicePaisesAdyacentes]->colorBT != -1 && pais->paisesAdyacente[indicePaisesAdyacentes]->colorBT != cantidadColores + 1)
             coloresPosibles[pais->paisesAdyacente[indicePaisesAdyacentes]->colorBT] = -1;
     //Se elije uno de los colores que no contenga ninguno de los otros paises adyacentes
     BTColor* mejorResultado = realizarSolucionesBTColores(pais, tamRegion, 1);
@@ -74,13 +76,35 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, int tamRegion)
     pais->setVisitadoBT(false);
     return mejorResultado;
 }
+*/
+
+BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, int indexActual)
+{
+    pais->setVisitadoBT(true);
+    pais->setIndexBT(indexActual);
+    indexActual++;
+    std::vector<std::pair<Pais*, int>> opcionColores;
+    for(auto iteradorPaisesAdyacentes = pais->paisesAdyacente.begin(); iteradorPaisesAdyacentes != pais->paisesAdyacente.end(); iteradorPaisesAdyacentes++)
+    {
+        realizarSolucionesBT(pais, indexActual);
+    }
+}
 
 void AlgoritmoBT::realizarBT()
 {
     std::vector<BTColor*> respuestas;
     for(int indiceRegiones = 0; indiceRegiones < mundo->getSizeRegiones(); indiceRegiones++)
     {
-        realizarSolucionesBT(mundo->getRegion(indiceRegiones), mundo->getSizeRegion(indiceRegiones));
+        //lazyWritting(realizarSolucionesBT(mundo->getRegion(indiceRegiones), mundo->getSizeRegion(indiceRegiones)));
+        respuestas.push_back(realizarSolucionesBT(mundo->getRegion(indiceRegiones), mundo->getSizeRegion(indiceRegiones)));
+    }
+}
 
+void AlgoritmoBT::lazyWritting(BTColor* colores)
+{
+    while(colores != NULL)
+    {
+        colores->getPaisAPintar()->pintarPaisBT(todosLosColores[colores->getColor()]);
+        colores = colores->getSiguienteColor();
     }
 }

@@ -19,7 +19,7 @@
 #include "AlgoritmoBT.cpp"
 #include "BTColor.cpp"
 
-
+#define COLORES 4
 
 using namespace std;
 
@@ -143,14 +143,26 @@ int main()
 	pugi::xml_node paisBT = docBacktracking.child("svg").child("path");
 
 	Mundo* mundo = new Mundo();
+	vector<string> todosLosColores = { "fill:#FF0000;fill-rule:evenodd",
+									   "fill:#FFFF00;fill-rule:evenodd",
+									   "fill:#0FFF00;fill-rule:evenodd",
+									   "fill:#00FFF0;fill-rule:evenodd",
+									   "fill:#FF00C1;fill-rule:evenodd",
+									   "fill:#8F00FF;fill-rule:evenodd",
+									   "fill:#0036FF;fill-rule:evenodd",
+									   "fill:#FF7E7E;fill-rule:evenodd",
+									   "fill:#B349C8;fill-rule:evenodd",
+									   "fill:#9A7606;fill-rule:evenodd",
+									   "fill:#007E7E;fill-rule:evenodd" };
 
+	/*
 	while(pais1 != NULL)
 	{
 		pruebaCo = pais1.attribute("d").value();
 		CordenadasPais = ParserCordenadasXY(pruebaCo);
 		CoX = std::get<0>(CordenadasPais);
 		CoY = std::get<1>(CordenadasPais);
-		Pais* paisActual = new Pais(pais1.attribute("data-name").value(), paisDV, paisPD, paisBT);
+		Pais* paisActual = new Pais(pais1.attribute("data-name").value(), paisDV.attribute("style"), paisPD.attribute("style"), paisBT.attribute("style"));
 		for (int i = 0; i < CoX.size(); i++)
 			coordenadas.push_back(new Coord(CoX.at(i), CoY.at(i), paisActual));
 		mundo->anadirPais(paisActual);
@@ -159,12 +171,47 @@ int main()
 		paisPD = paisPD.next_sibling();
 		paisBT = paisBT.next_sibling();
 	}
+	*/
+
+	Pais* CostaRica = new Pais("Costa Rica");
+	Pais* Nicaragua = new Pais("Nicaragua");
+	Pais* Panama = new Pais("Panama");
+	Pais* Colombia = new Pais("Colombia");
+	Pais* EstadosUnidos = new Pais("Estados Unidos");
+	Pais* Canada = new Pais("Canada");
+	Pais* Espana = new Pais("Espana");
+	Pais* Ecuador = new Pais("Ecuador");
+
+	mundo->anadirPais(CostaRica);
+	mundo->anadirPais(Nicaragua);
+	mundo->anadirPais(Panama);
+	mundo->anadirPais(Colombia);
+	mundo->anadirPais(EstadosUnidos);
+	mundo->anadirPais(Canada);
+	mundo->anadirPais(Espana);
+	mundo->anadirPais(Ecuador);
+
+	coordenadas.push_back(new Coord(182, 20, CostaRica));
+	coordenadas.push_back(new Coord(182, 20, Nicaragua));
+	coordenadas.push_back(new Coord(170, 10, CostaRica));
+	coordenadas.push_back(new Coord(170, 10, Panama));
+	coordenadas.push_back(new Coord(60, 60, Panama));
+	coordenadas.push_back(new Coord(60, 60, Colombia));
+	coordenadas.push_back(new Coord(90, 90, Colombia));
+	coordenadas.push_back(new Coord(90, 90, Ecuador));
+	
+	coordenadas.push_back(new Coord(20, 20, EstadosUnidos));
+	coordenadas.push_back(new Coord(20, 20, Canada));
+	coordenadas.push_back(new Coord(1, 1, Espana));
 
 	sort(coordenadas.begin(), coordenadas.end(), OrdenadoPorX());
 	cout << coordenadas.size() << endl;
 	contarPosiblesAdyacentes(coordenadas);
 	mundo->realizarRegiones();
-	AlgoritmoBT algoritmoBT(mundo);
+	AlgoritmoBT algoritmoBT(mundo, COLORES, todosLosColores);
 	algoritmoBT.realizarBT();
+
+	docBacktracking.save_file("worldBackTracking.svg");
+
 	return 0;
 }

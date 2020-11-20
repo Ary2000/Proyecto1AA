@@ -2,6 +2,7 @@
 #define MUNDO_H
 
 #include <vector>
+#include <string>
 
 #include "Pais.h"
 
@@ -14,6 +15,7 @@ class Mundo
     public:
     std::vector<Pais*> regiones;
     std::vector<int> tamanoRegiones;
+    std::vector<std::string> colores;
 
     Mundo();
     void anadirPais(Pais* pais) { paises.push_back(pais); }
