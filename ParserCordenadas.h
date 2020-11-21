@@ -8,7 +8,7 @@
 
 
 //Funcion que recibe como parametros el String de Cordenadas X y Y, devuelde la Sumatoria de ambas
-std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::string pCordenadas) {
+std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::string pCordenadas, bool seImprime) {
 
     std::vector<double> CordenadasX{};
     std::vector<double> CordenadasY{};
@@ -37,7 +37,8 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
                 }
                 sumatoriaY += stod(indiceY);
                 CordenadasY.push_back(sumatoriaY);
-                //std::cout << sumatoriaX << ' ' << sumatoriaY << std::endl;
+                //if(seImprime)
+                //    std::cout << sumatoriaX << ' ' << sumatoriaX << std::endl;
                 indiceY = "";
                 indiceX = "";
                 i++;

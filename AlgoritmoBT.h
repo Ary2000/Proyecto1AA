@@ -19,15 +19,17 @@ class AlgoritmoBT
     int cantidadEspaciosMinimos;
     int cantidadColores;
     std::vector<std::string> todosLosColores;
-    BTColor* mejorBT = NULL;
+    BTColor* mejorBT = nullptr;
     std::vector<Pais*> paisesDeRegion;
     ManejadorDocs* manejador;
 
     std::vector<std::vector<int>> coloresRegiones;
 
+    std::vector<BTColor*> mejoresAnteriores;
+
     std::vector<int> vectorAuxiliar;
 
-    int cantidadBlancosTotal = 99999999999;
+    int cantidadBlancosTotal = 9999999;
     int tamanoRegionActual = 0;
 
     std::vector<Pais*> camino;

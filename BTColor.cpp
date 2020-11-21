@@ -7,15 +7,7 @@ BTColor::BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados
     this->cantidadBlancos = cantidadBlancos;
     this->paisesVisitados = paisesVisitados;
     siguienteColor = nullptr;
-}
-
-BTColor::BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados, BTColor* siguienteColor)
-{
-    paisAColorear = pais;
-    this->color = color;
-    this->cantidadBlancos = cantidadBlancos;
-    this->paisesVisitados = paisesVisitados;
-    this->siguienteColor = siguienteColor;
+    anteriorColor = nullptr;
 }
 
 bool BTColor::existePaisEnLosCambios(Pais* pais)
@@ -51,5 +43,8 @@ void BTColor::push_back(BTColor* ultimo)
     if(siguienteColor)
         siguienteColor->push_back(ultimo);
     else
+    {
         siguienteColor = ultimo;
+        ultimo->setAnteriorColor(this);
+    }
 }

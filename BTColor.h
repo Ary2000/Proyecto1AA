@@ -8,6 +8,7 @@ class BTColor
     private:
     Pais* paisAColorear;
     int color;
+    BTColor* anteriorColor;
     BTColor* siguienteColor;
     int cantidadBlancos;
     int paisesVisitados;
@@ -15,7 +16,6 @@ class BTColor
     public:
 
     BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados);
-    BTColor(Pais* pais, int color, int cantidadBlancos, int paisesVisitados, BTColor* colorSiguiente);
 
     void marcarSiguiente(BTColor* siguiente);
     bool existePaisEnLosCambios(Pais* pais);
@@ -28,13 +28,20 @@ class BTColor
     int getPaisesVisitados() { return paisesVisitados; }
     int getColor() {return color; }
     Pais* getPaisAPintar() { return paisAColorear; }
+    bool tieneSiguiente() 
+    { 
+        if(siguienteColor != nullptr)
+            return true;
+        return false;
+    }
     BTColor* getSiguienteColor() { return siguienteColor; }
+    BTColor* getAnteriorColor() { return anteriorColor; }
     
     //sets
     void setCantidadBlancos(int cantidadBlancos) { this->cantidadBlancos = cantidadBlancos; }
     void setCantidadVisitados(int paisesVisitados) { this->paisesVisitados = paisesVisitados; }
-
-    ~BTColor() { delete siguienteColor; }
+    void setSiguienteColor(BTColor* siguienteColor) { this->siguienteColor = siguienteColor ;}
+    void setAnteriorColor(BTColor* anteriorColor) { this->anteriorColor = anteriorColor ;}
     
 
 };
