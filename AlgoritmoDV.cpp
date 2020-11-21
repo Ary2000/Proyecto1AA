@@ -107,12 +107,14 @@ void AlgoritmoDV::realizarDV(){
 			if (actualBuffer->colorBT!=0)
 			{
 				actualBuffer->pintarPaisDV(todosLosColores[actualBuffer->colorBT-1]);
-				manejador->docDV.save_file("worldDivideVenceras.svg");
+				//manejador->docDV.save_file("worldDivideVenceras.svg");
+				manejador->salvarArchivoDV();
 			}
 		}
 		lista={};
 	}
-	cout << "Total de Paises en Blanco Algoritmo Programacion Divide y Venceras " << contadorBlancos <<endl;
-
+	
+	manejador->ponerBlancosYTiempoDV(contadorBlancos, 0);
+    manejador->salvarArchivoDV();
 }
 

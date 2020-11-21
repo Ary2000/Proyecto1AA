@@ -221,12 +221,14 @@ void AlgoritmoProgDina::realizarProgDina(){
 			if (actualBuffer->colorBT!=0)
 			{
 				actualBuffer->pintarPaisPD(todosLosColores[actualBuffer->colorBT-1]);
-				manejador->docPD.save_file("worldProgDinamica.svg");
+				//manejador->docPD.save_file("worldProgDinamica.svg");
+				manejador->salvarArchivoPD();
 			}
 		}
 		lista={};
 		
 	}
-	cout << "Total de Paises en Blanco Algoritomo Programacion Dinamica " << ColoresUsados[11]<<endl;
 	
+	manejador->ponerBlancosYTiempoPD(ColoresUsados[11], 0);
+    manejador->salvarArchivoPD();
 }
