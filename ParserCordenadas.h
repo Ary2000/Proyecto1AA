@@ -23,12 +23,6 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
     int indiceCordenadas = 0;
 
     while (i < largoString) {
-        if(pCordenadas.at(i) == 'M')
-        {
-            sumatoriaX = 0;
-            sumatoriaY = 0;
-            i += 2;
-        }
         while ((pCordenadas.at(i) != *" ") && (pCordenadas.at(i) != *"z")) {
             indiceX += pCordenadas.at(i);
             i++;
@@ -56,6 +50,17 @@ std::tuple<std::vector<double>, std::vector<double>> ParserCordenadasXY(std::str
             }
         }
 
+        if (198<=largoString)
+        {
+            if (i==196)
+            {
+                if ((pCordenadas.at(198) == *"M")){
+            sumatoriaX = 0;
+            sumatoriaY = 0;
+            }
+        }
+            
+        }
 
         if (pCordenadas.at(i) == *"z")
         {
