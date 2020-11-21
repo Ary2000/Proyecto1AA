@@ -22,6 +22,7 @@ public:
 	bool esCamino = false;
 	int indexBT = -1;
 	int colorBT = -1;
+	bool caminoVisitado = false;
 
 	Pais(std::string nombre, pugi::xml_attribute attrDV, pugi::xml_attribute attrPD, pugi::xml_attribute attrBT);
 	Pais(std::string nombre) { this->nombre = nombre; }

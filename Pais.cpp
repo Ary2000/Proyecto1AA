@@ -37,11 +37,9 @@ int Pais::marcarAdyacentes()
 }
 
 void Pais::pintarPaisBT(std::string colorAPoner)
-{ 
-	int indiceBack = colorAPoner.length();
-	char arrayBackTraking[indiceBack + 1];
-	strcpy(arrayBackTraking, colorAPoner.c_str());
-	attrBT.set_value(arrayBackTraking); 
+{   
+    const char* colorPo = colorAPoner.c_str();
+	attrBT.set_value(colorPo); 
 }
 
 void Pais::pintarPaisDV(std::string colorAPoner)

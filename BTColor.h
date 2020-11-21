@@ -26,7 +26,7 @@ class BTColor
     //gets
     int getCantidadBlancos() { return cantidadBlancos; }
     int getPaisesVisitados() { return paisesVisitados; }
-    int getColor() {return color; }
+    int getColor() { return color; }
     Pais* getPaisAPintar() { return paisAColorear; }
     bool tieneSiguiente() 
     { 

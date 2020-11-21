@@ -25,7 +25,7 @@
 #include "BTColor.cpp"
 #include "manejadorDocs.cpp"
 
-#define COLORES 11
+#define COLORES 3
 
 using namespace std;
 
@@ -159,7 +159,7 @@ int main()
 	pugi::xml_node paisBT = manejador->docBT.child("svg").child("path");
 
 	Mundo* mundo = new Mundo();
-	vector<string> todosLosColores = { "fill:#FF0000;fill-rule:evenodd",
+	vector<std::string> todosLosColores = { "fill:#FF0000;fill-rule:evenodd",
 									   "fill:#FFFF00;fill-rule:evenodd",
 									   "fill:#0FFF00;fill-rule:evenodd",
 									   "fill:#00FFF0;fill-rule:evenodd",

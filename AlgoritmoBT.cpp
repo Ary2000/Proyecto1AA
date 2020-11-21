@@ -144,6 +144,7 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
 
         if(colorPosible != -1)
         {
+
             pais->colorBT = colorPosible;
             BTColor* colorActual;
             colorActual = new BTColor(pais, colorPosible, 0, 0);
@@ -154,10 +155,11 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                 colorActual->push_back(resultadoAnterior);
             }
             if(posicion + 1 < camino.size())
-                colorActual = realizarSolucionesBT(camino[++posicion], colorActual, posicion);
+                colorActual = realizarSolucionesBT(camino[posicion + 1], colorActual, posicion + 1);
 
             if (mejorResultado == nullptr || mejorResultado->getCantidadBlancos() > colorActual->getCantidadBlancos())
-            {
+            {   
+                /*
                 BTColor* auxABorrar = mejorResultado;
                 if(mejorResultado != nullptr && mejorResultado->getAnteriorColor() != nullptr)
                 {
@@ -193,18 +195,18 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                         auxABorrar = auxABorrar->getSiguienteColor();
                     }
                 }
+                */
                 mejorResultado = colorActual;
             }
             else{
-                delete colorActual;
+                //delete colorActual;
+                //BTColor* auxABorrar = colorActual;
                 /*
-                BTColor* auxABorrar = colorActual;
                 while (auxABorrar != nullptr)
                 {
                     BTColor* colorActualAux = mejorResultado;
-                    BTColor* auxBT = mejorBT;
                     bool seEncontro = false;
-                    while(colorActualAux != nullptr || auxBT != nullptr)
+                    while(colorActualAux != nullptr)
                     {
                         if(colorActualAux == auxABorrar || colorActualAux == mejorBT)
                         {
@@ -213,8 +215,6 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                         }
                         if(colorActualAux != nullptr)
                             colorActualAux = colorActualAux->getSiguienteColor();
-                        if(auxBT != nullptr)
-                            auxBT = auxBT->getSiguienteColor();
                     }
                     if(!seEncontro)
                     {
@@ -233,8 +233,8 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                 }
                 */
             }
-            if(resultadoAnterior != nullptr && mejorResultado != nullptr && mejorResultado->getCantidadBlancos() == resultadoAnterior->getCantidadBlancos())
-                break;
+            //if(resultadoAnterior != nullptr && mejorResultado != nullptr && mejorResultado->getCantidadBlancos() == resultadoAnterior->getCantidadBlancos())
+            //    break;
         }
     }
     if(mejorResultado == nullptr)
@@ -247,6 +247,9 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
             mejorResultado = new BTColor(pais, -1, resultadoAnterior->getCantidadBlancos() + 1, 0);
             mejorResultado->push_back(resultadoAnterior);
         }
+        if(posicion + 1 < camino.size())
+            mejorResultado = realizarSolucionesBT(camino[posicion + 1], mejorResultado, posicion + 1);
+
     }
     if(camino.size() - 1 == posicion)
     {
@@ -283,8 +286,8 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                 }
             }
             */
-            mejoresAnteriores.push_back(mejorBT);
-            mejorBT = mejorResultado;
+            //mejoresAnteriores.push_back(mejorBT);
+            //mejorBT = mejorResultado;
         }
     }
     pais->colorBT = -1;
@@ -374,8 +377,7 @@ void AlgoritmoBT::realizarBT()
                     delete aux;
                 }
                 for(auto iteradorCamino = camino.begin(); iteradorCamino != camino.end(); iteradorCamino++)
-                {
-                    
+                {     
                     (*iteradorCamino)->setVisitadoBT(true);
                     (*iteradorCamino)->esCamino = true;
                 }
@@ -420,9 +422,17 @@ void AlgoritmoBT::conseguirPaisesRegion(Pais* pais, int indice)
 void AlgoritmoBT::lazyWritting(BTColor* colores)
 {
     while(colores != NULL)
-    {
+    {   
         colores->getPaisAPintar()->colorBT = colores->getColor();
-        colores->getPaisAPintar()->pintarPaisBT(todosLosColores[colores->getColor()]);
+        if(colores->getColor() == -1)
+        {
+            colores = colores->getSiguienteColor();
+            continue;
+        }
+        Pais* paisAPintar = colores->getPaisAPintar();
+        std::string color = todosLosColores[colores->getColor()];
+        //std::cout << color << std::endl;
+        paisAPintar->pintarPaisBT(color);
         colores = colores->getSiguienteColor();
     }
 }
