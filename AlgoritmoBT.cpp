@@ -353,6 +353,7 @@ void AlgoritmoBT::realizarBT()
 void AlgoritmoBT::realizarBT()
 {
     //std::vector<BTColor*> respuestas;
+    int pBlancos = 0;
     for(int indiceRegiones = 0; indiceRegiones < mundo->getSizeRegiones(); indiceRegiones++)
     {
         conseguirPaisesRegion(mundo->getRegion(indiceRegiones), 0);
@@ -362,6 +363,7 @@ void AlgoritmoBT::realizarBT()
             {
                 crearCamino(*iteradorPaisesRegion);
                 BTColor* respuesta = realizarSolucionesBT(*iteradorPaisesRegion, nullptr, 0);
+                pBlancos += respuesta->getCantidadBlancos();
                 //respuestas.push_back(mejorBT);
                 lazyWritting(respuesta);
                 manejador->docBT.save_file("worldBackTracking.svg");
@@ -382,6 +384,8 @@ void AlgoritmoBT::realizarBT()
         }
         
     }
+    manejador->ponerBlancosYTiempoBT(pBlancos, 0);
+    manejador->salvarArchivoBT();
 } 
 
 void AlgoritmoBT::crearCamino(Pais* pais)

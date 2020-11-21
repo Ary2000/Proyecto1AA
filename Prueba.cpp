@@ -139,6 +139,15 @@ int main()
 	//pugi::xml_document docDV;
 	//pugi::xml_parse_result resultDV = docDV.load_file("worldDivideVenceras.svg");
 	ManejadorDocs* manejador = new ManejadorDocs("worldDivideVenceras.svg", "worldProgDinamica.svg", "worldBackTracking.svg");
+	pugi::xml_node textoDV = manejador->docDV.child("svg");
+	/*
+	pugi::xml_node textoDVParte = textoDV.append_child("text");
+    textoDVParte.append_attribute("x") = 0;
+    textoDVParte.append_attribute("y") = 13;
+    textoDVParte.append_attribute("fill") = "red";
+	textoDVParte.set_value("hola");
+	manejador->salvarArchivoDV();
+	*/
 	pugi::xml_node paisDV = manejador->docDV.child("svg").child("path");
 
 	//pugi::xml_document docPD;
