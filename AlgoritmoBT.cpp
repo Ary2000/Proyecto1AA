@@ -356,6 +356,7 @@ void AlgoritmoBT::realizarBT()
 void AlgoritmoBT::realizarBT()
 {
     //std::vector<BTColor*> respuestas;
+    auto start = std::chrono::system_clock::now();
     int pBlancos = 0;
     for(int indiceRegiones = 0; indiceRegiones < mundo->getSizeRegiones(); indiceRegiones++)
     {
@@ -386,7 +387,10 @@ void AlgoritmoBT::realizarBT()
         }
         
     }
-    manejador->ponerBlancosYTiempoBT(pBlancos, 0);
+    auto end = std::chrono::system_clock::now();
+	std::chrono::duration<double,std::milli> duration = end - start;
+	double tiempoFinal = duration.count();
+    manejador->ponerBlancosYTiempoBT(pBlancos, tiempoFinal);
     manejador->salvarArchivoBT();
 } 
 

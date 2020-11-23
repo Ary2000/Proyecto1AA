@@ -27,6 +27,7 @@ std::vector<int> AlgoritmoDV::hacerVectorColores(int pNumColores){
 
 void AlgoritmoDV::realizarDV(){
 
+	auto start = std::chrono::system_clock::now();
     std::vector<int> ColoresPos{};
 	ColoresPos = hacerVectorColores(pNumColores);
 	std::vector<int> ReinicioColoresPos = ColoresPos;
@@ -107,14 +108,16 @@ void AlgoritmoDV::realizarDV(){
 			if (actualBuffer->colorBT!=0)
 			{
 				actualBuffer->pintarPaisDV(todosLosColores[actualBuffer->colorBT-1]);
-				//manejador->docDV.save_file("worldDivideVenceras.svg");
-				manejador->salvarArchivoDV();
+				manejador->docDV.save_file("worldDivideVenceras.svg");
+				//manejador->salvarArchivoDV();
 			}
 		}
 		lista={};
 	}
-	
-	manejador->ponerBlancosYTiempoDV(contadorBlancos, 0);
+	auto end = std::chrono::system_clock::now();
+	std::chrono::duration<double,std::milli> duration = end - start;
+	double tiempoFinal = duration.count();
+	manejador->ponerBlancosYTiempoDV(contadorBlancos,tiempoFinal);
     manejador->salvarArchivoDV();
 }
 

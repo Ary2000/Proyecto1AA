@@ -144,7 +144,7 @@ std::tuple<int, std::vector<int>> AlgoritmoProgDina::asignarMejorColor(std::vect
 void AlgoritmoProgDina::realizarProgDina(){
 
 
-	
+	auto start = std::chrono::system_clock::now();
 	std::vector<int> ColoresPos{};
 	ColoresPos = hacerVectorColores(pNumColores);
 	std::vector<int> ColoresUsados{0,0,0,0,0,0,0,0,0,0,0,0};
@@ -228,7 +228,9 @@ void AlgoritmoProgDina::realizarProgDina(){
 		lista={};
 		
 	}
-	
-	manejador->ponerBlancosYTiempoPD(ColoresUsados[11], 0);
+	auto end = std::chrono::system_clock::now();
+	std::chrono::duration<double,std::milli> duration = end - start;
+	double tiempoFinal = duration.count();
+	manejador->ponerBlancosYTiempoPD(ColoresUsados[11], tiempoFinal);
     manejador->salvarArchivoPD();
 }

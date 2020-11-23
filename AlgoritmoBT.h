@@ -5,6 +5,7 @@
 #include <vector>
 #include <numeric>
 #include <string>
+#include <chrono>
 
 #include "Mundo.h"
 #include "BTColor.h"

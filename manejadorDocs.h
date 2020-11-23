@@ -2,6 +2,7 @@
 #define MANEJADORDOCS_H
 
 #include <string>
+#include <chrono>
 
 #include "pugixml.hpp"
 
