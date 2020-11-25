@@ -233,8 +233,8 @@ BTColor* AlgoritmoBT::realizarSolucionesBT(Pais* pais, BTColor* resultadoAnterio
                 }
                 */
             }
-            //if(resultadoAnterior != nullptr && mejorResultado != nullptr && mejorResultado->getCantidadBlancos() == resultadoAnterior->getCantidadBlancos())
-            //    break;
+            if(resultadoAnterior != nullptr && mejorResultado != nullptr && mejorResultado->getCantidadBlancos() == resultadoAnterior->getCantidadBlancos())
+                return mejorResultado;
         }
     }
     if(mejorResultado == nullptr)
